@@ -1,0 +1,39 @@
+/*
+ * Decompiled with CFR <Could not determine version>.
+ * 
+ * Could not load the following classes:
+ *  net.minecraft.launchwrapper.Launch
+ *  net.minecraft.launchwrapper.LaunchClassLoader
+ */
+package org.spongepowered.asm.service.mojang;
+
+import net.minecraft.launchwrapper.Launch;
+import net.minecraft.launchwrapper.LaunchClassLoader;
+import org.spongepowered.asm.service.IMixinServiceBootstrap;
+
+public class MixinServiceLaunchWrapperBootstrap
+implements IMixinServiceBootstrap {
+    private static final String SERVICE_PACKAGE = "org.spongepowered.asm.service.";
+    private static final String MIXIN_UTIL_PACKAGE = "org.spongepowered.asm.util.";
+    private static final String ASM_PACKAGE = "org.spongepowered.asm.lib.";
+    private static final String MIXIN_PACKAGE = "org.spongepowered.asm.mixin.";
+
+    @Override
+    public String getName() {
+        return "LaunchWrapper";
+    }
+
+    @Override
+    public String getServiceClassName() {
+        return "org.spongepowered.asm.service.mojang.MixinServiceLaunchWrapper";
+    }
+
+    @Override
+    public void bootstrap() {
+        Launch.classLoader.addClassLoaderExclusion(SERVICE_PACKAGE);
+        Launch.classLoader.addClassLoaderExclusion(ASM_PACKAGE);
+        Launch.classLoader.addClassLoaderExclusion(MIXIN_PACKAGE);
+        Launch.classLoader.addClassLoaderExclusion(MIXIN_UTIL_PACKAGE);
+    }
+}
+
